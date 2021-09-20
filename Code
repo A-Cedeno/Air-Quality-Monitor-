@@ -1,0 +1,35 @@
+int buzzer = 10;
+int smokeA0 = A5;
+
+// Sensor threshold value set as 400
+int sensorThres = 400;
+
+void setup()
+  {
+  pinMode(buzzer, OUTPUT);
+  pinMode(smokeA0, INPUT);
+  Serial.begin(9600);
+  }
+
+void loop()
+  {
+  int analogSensor = analogRead(smokeA0);
+
+  Serial.print("Pin A0: ");
+  Serial.println(analogSensor);
+  
+  // Checks if the analog sensor has reached the sensor threshold value
+  
+  if (analogSensor > sensorThres) //(analogSensor > 400)
+  {
+    tone(buzzer, 1000, 200);
+  }
+
+   // Otherwise the buzzer won't buzz
+   
+  else
+  {
+    noTone(buzzer);
+  }
+  delay(100);
+  }
